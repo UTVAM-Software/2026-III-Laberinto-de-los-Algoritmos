@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+<p><a href="{{ list_url }}">← {{ title }}</a></p><h1>Detalle del registro</h1>
+<div class="card"><dl>{% for label, value in rows %}<dt><strong>{{ label|capfirst }}</strong></dt><dd style="white-space:pre-wrap;overflow-wrap:anywhere">{{ value|default_if_none:'—' }}</dd>{% endfor %}</dl></div>
+<p><a class="button" href="{% url 'administracion:update' entity object.pk %}">Editar</a> <a href="{% url 'administracion:delete' entity object.pk %}">Eliminar</a></p>
+{% endblock %}

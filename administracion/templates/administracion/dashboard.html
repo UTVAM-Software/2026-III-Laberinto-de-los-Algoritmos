@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Administración del sistema</h1>
+<p>Gestiona usuarios, roles, permisos y los registros del proyecto. Las operaciones de este módulo requieren una cuenta de administrador.</p>
+<div class="card"><table><thead><tr><th>Entidad</th><th>Registros</th><th>Acciones</th></tr></thead><tbody>
+{% for section in sections %}<tr><td>{{ section.title }}</td><td>{{ section.count }}</td><td><a href="{% url 'administracion:list' section.key %}">Administrar</a></td></tr>{% endfor %}
+</tbody></table></div>
+{% endblock %}

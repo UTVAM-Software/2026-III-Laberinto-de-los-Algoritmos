@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<p><a href="{{ list_url }}">← {{ title }}</a></p><h1>Confirmar eliminación</h1>
+<p>Registro: <strong>{{ object }}</strong> ({{ object.pk }}).</p>
+<p>La eliminación es permanente. También se eliminarán los siguientes registros relacionados cuando corresponda:</p>
+<ul>{% for label, count in affected %}<li>{{ label|capfirst }}: {{ count }}</li>{% endfor %}</ul>
+{% if protected %}<p>Existen relaciones protegidas: este registro no puede eliminarse mientras otros dependan de él.</p>{% else %}<form method="post">{% csrf_token %}<button class="button" type="submit">Confirmar eliminación permanente</button></form>{% endif %}
+<p><a href="{{ list_url }}">Cancelar y volver</a></p>
+{% endblock %}
