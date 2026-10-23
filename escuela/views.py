@@ -94,9 +94,15 @@ class StudentList(SchoolPermission, ListView):
 
     def get_queryset(self):
         qs = students_for(self.request.user)
+
         category = self.request.GET.get("category")
         if category:
             qs = qs.filter(category__code=category)
+
+        search = self.request.GET.get("q", "").strip()
+        if search:
+            qs = qs.filter(name__icontains=search)
+
         return qs
 
 

@@ -1,1 +1,50 @@
-{% extends 'base.html' %}{% block content %}<div class="section-head"><div><span class="eyebrow">CADA MENTE, SU PROPIO RITMO</span><h1>Mis alumnos</h1></div><a class="button" href="{% url 'escuela:student_create' %}">+ Añadir participante</a></div><p><a class="button secondary" href="{% url 'escuela:bulk_students' %}">Añadir varios alumnos de una vez →</a></p><div class="filters"><a href="?">Todos</a><a href="?category=ALFA">Alfa</a><a href="?category=BETA">Beta</a><a href="?category=OMEGA">Omega</a></div>{% include 'escuela/student_table.html' with students=object_list %}{% endblock %}
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="section-head">
+    <div>
+        <span class="eyebrow">CADA MENTE, SU PROPIO RITMO</span>
+        <h1>Mis alumnos</h1>
+    </div>
+    <a class="button" href="{% url 'escuela:student_create' %}">
+        + Añadir participante
+    </a>
+</div>
+
+<p>
+    <a class="button secondary" href="{% url 'escuela:bulk_students' %}">
+        Añadir varios alumnos de una vez →
+    </a>
+</p>
+
+<form method="get" class="filters">
+    <label for="student-search">Nombre o alias</label>
+    <input
+        type="search"
+        id="student-search"
+        name="q"
+        value="{{ request.GET.q|default:'' }}"
+        placeholder="Escribe un nombre"
+        maxlength="150"
+    >
+
+    <label for="student-category">Categoría</label>
+    <select id="student-category" name="category">
+        <option value="">Todas las categorías</option>
+        <option value="ALFA" {% if request.GET.category == 'ALFA' %}selected{% endif %}>
+            Alfa
+        </option>
+        <option value="BETA" {% if request.GET.category == 'BETA' %}selected{% endif %}>
+            Beta
+        </option>
+        <option value="OMEGA" {% if request.GET.category == 'OMEGA' %}selected{% endif %}>
+            Omega
+        </option>
+    </select>
+
+    <button type="submit" class="button">Buscar</button>
+    <a href="{% url 'escuela:students' %}">Limpiar filtros</a>
+</form>
+
+{% include 'escuela/student_table.html' with students=object_list %}
+{% endblock %}
