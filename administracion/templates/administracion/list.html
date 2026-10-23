@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<p><a href="{% url 'administracion:dashboard' %}">← Administración</a></p>
+<div class="section-head"><h1>{{ title }}</h1><a class="button" href="{% url 'administracion:create' entity %}">Crear registro</a></div>
+<form method="get"><label for="record-query">Buscar</label><input type="search" id="record-query" name="q" value="{{ request.GET.q|default:'' }}"><button class="button" type="submit">Buscar</button> <a href="{{ list_url }}">Limpiar</a></form>
+<div class="card"><table><thead><tr><th>Identificador</th><th>Registro</th><th>Acciones</th></tr></thead><tbody>
+{% for record in object_list %}<tr><td>{{ record.pk }}</td><td>{{ record }}</td><td><a href="{% url 'administracion:detail' entity record.pk %}">Consultar</a> · <a href="{% url 'administracion:update' entity record.pk %}">Editar</a> · <a href="{% url 'administracion:delete' entity record.pk %}">Eliminar</a></td></tr>{% empty %}<tr><td colspan="3">No hay registros que mostrar.</td></tr>{% endfor %}
+</tbody></table></div>
+{% if is_paginated %}<p>Página {{ page_obj.number }} de {{ paginator.num_pages }}.
+{% if page_obj.has_previous %}<a href="?q={{ request.GET.q|default:''|urlencode }}&amp;page={{ page_obj.previous_page_number }}">Anterior</a>{% endif %}
+{% if page_obj.has_next %}<a href="?q={{ request.GET.q|default:''|urlencode }}&amp;page={{ page_obj.next_page_number }}">Siguiente</a>{% endif %}</p>{% endif %}
+{% endblock %}

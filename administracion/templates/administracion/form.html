@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<p><a href="{{ list_url }}">← {{ title }}</a></p>
+<h1>{% if creating %}Crear{% else %}Editar{% endif %} · {{ title }}</h1>
+{% if entity == 'usuarios' %}<p>Asigna roles en «Grupos» y permisos individuales en «Permisos de usuario». Puedes seleccionar varios con Ctrl. Las contraseñas se almacenan mediante el sistema de hash de Django.</p>{% endif %}
+{% if entity == 'roles' %}<p>Selecciona los permisos que concederá este rol. Usa Ctrl para seleccionar varios.</p>{% endif %}
+{% if entity == 'partidas' or entity == 'respuestas' or entity == 'aprendizajes' or entity == 'desbloqueos' %}<p>Estos registros forman parte del historial académico. Revisa sus relaciones antes de guardar cambios.</p>{% endif %}
+<div class="card"><form method="post">{% csrf_token %}{{ form.as_p }}<button class="button" type="submit">Guardar</button> <a href="{{ list_url }}">Cancelar</a></form></div>
+{% endblock %}
