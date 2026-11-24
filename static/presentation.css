@@ -1,0 +1,30 @@
+/* El logo original se muestra completo, sin recortar su nombre ni sus colores. */
+.project-logo { display: block; width: 100%; height: auto; object-fit: contain; border-radius: 18px; }
+.sidebar .brand { justify-content: center; }
+.sidebar .brand .project-logo { width: 145px; }
+.sidebar .nav-label { margin-top: 22px; }
+.login-logo { max-width: 240px; margin: 20px auto; }
+.hub-shell .adventure-banner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.hero-logo { flex: 0 1 260px; min-width: 0; align-self: center; }
+.display-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.display-header .project-logo { width: 72px; }
+.display-header span { flex: 1; min-width: 180px; }
+.game-play:fullscreen .sidebar,
+:fullscreen .game-play .sidebar,
+.game-play.presentation-mode .sidebar,
+:fullscreen .game-play .topbar,
+.game-play.presentation-mode .topbar,
+:fullscreen .game-play footer,
+.game-play.presentation-mode footer { display: none; }
+:fullscreen .game-play .main,
+.game-play.presentation-mode .main { margin-left: 0; }
+.game-play .actions { flex-wrap: wrap; }
+@media (max-width: 900px) {
+  .sidebar .brand .project-logo { width: 64px; }
+}
+@media (max-width: 600px) {
+  .hero-logo { flex-basis: auto; width: 150px; margin: 18px auto 0; }
+  .adventure-banner { flex-wrap: wrap; }
+  .login-logo { max-width: 180px; }
+  .display-header { font-size: 12px; }
+}
